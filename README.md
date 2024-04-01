@@ -25,7 +25,7 @@ The schema consists of 16 tables, employing various relational models, constrain
 
 ## Key Features
 - Employees can be associated with multiple departments simultaneously, holding different positions within each.
--Each employee can have distinct schedules tailored to their various positions.
+- Each employee can have distinct schedules tailored to their various positions.
 - An insurance module enabling employees to enroll in one option per year, and optionally including family members in the same or different option.
 - A contract system streamlining employee payments.
 
@@ -34,4 +34,4 @@ The schema consists of 16 tables, employing various relational models, constrain
 To implement and utilize this database schema effectively:
 1. Install [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) and a comptabile database management tool (e.g. [pgAdmin](https://www.pgadmin.org/download/pgadmin-4-windows/)).
 2. Create a new database.
-3. Execute the SQL scripts provided in the `HR-schema` file to create the tables, domains, constraints, and other necessary attributes.
+3. Execute the SQL scripts provided in the [HR-schema](https://github.com/andrewzgheib/HRMS-database/blob/main/HR-Schema.sql) file to create the tables, domains, constraints, and other necessary attributes.
