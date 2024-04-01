@@ -1,226 +1,20 @@
 /*
- Navicat Premium Dump SQL
+ Navicat Premium SQL Dump
 
  Source Server         : PostgreSQL
  Source Server Type    : PostgreSQL
  Source Server Version : 160002 (160002)
- Source Host           : localhost:5432
- Source Catalog        : HR
+ Source Host           : localhost
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
  Target Server Version : 160002 (160002)
  File Encoding         : 65001
 
- Date: 01/04/2024 03:11:24
 */
 
 
--- ----------------------------
--- Type structure for citext
--- ----------------------------
-DROP TYPE IF EXISTS "public"."citext";
-CREATE TYPE "public"."citext" (
-  INPUT = "public"."citextin",
-  OUTPUT = "public"."citextout",
-  RECEIVE = "public"."citextrecv",
-  SEND = "public"."citextsend",
-  INTERNALLENGTH = VARIABLE,
-  STORAGE = extended,
-  CATEGORY = S,
-  DELIMITER = ',',
-  COLLATABLE = true
-);
-ALTER TYPE "public"."citext" OWNER TO "postgres";
-
--- ----------------------------
--- Type structure for schedule_options
--- ----------------------------
-DROP TYPE IF EXISTS "public"."schedule_options";
-CREATE TYPE "public"."schedule_options" AS ENUM (
-  '8am to 4pm',
-  '9am to 5pm',
-  '8am to 12am',
-  '12am to 8am',
-  'part-time'
-);
-ALTER TYPE "public"."schedule_options" OWNER TO "postgres";
-
--- ----------------------------
--- Sequence structure for address_addressID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."address_addressID_seq";
-CREATE SEQUENCE "public"."address_addressID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for city_cityID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."city_cityID_seq";
-CREATE SEQUENCE "public"."city_cityID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for contract_contractID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."contract_contractID_seq";
-CREATE SEQUENCE "public"."contract_contractID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for contract_type_contract_typeID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."contract_type_contract_typeID_seq";
-CREATE SEQUENCE "public"."contract_type_contract_typeID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for country_countryID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."country_countryID_seq";
-CREATE SEQUENCE "public"."country_countryID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for department_departmentID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."department_departmentID_seq";
-CREATE SEQUENCE "public"."department_departmentID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_departement_employee_departementID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_departement_employee_departementID_seq";
-CREATE SEQUENCE "public"."employee_departement_employee_departementID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_employeeID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_employeeID_seq";
-CREATE SEQUENCE "public"."employee_employeeID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_insurance_employee_insuranceID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_insurance_employee_insuranceID_seq";
-CREATE SEQUENCE "public"."employee_insurance_employee_insuranceID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_pn_employee_pnID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_pn_employee_pnID_seq";
-CREATE SEQUENCE "public"."employee_pn_employee_pnID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_position_employee_positionID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_position_employee_positionID_seq";
-CREATE SEQUENCE "public"."employee_position_employee_positionID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for insurance_insuranceID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."insurance_insuranceID_seq";
-CREATE SEQUENCE "public"."insurance_insuranceID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for payment_currency_payment_currencyID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."payment_currency_payment_currencyID_seq";
-CREATE SEQUENCE "public"."payment_currency_payment_currencyID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for payment_paymentID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."payment_paymentID_seq";
-CREATE SEQUENCE "public"."payment_paymentID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for position_positionID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."position_positionID_seq";
-CREATE SEQUENCE "public"."position_positionID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for schedule_scheduleID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."schedule_scheduleID_seq";
-CREATE SEQUENCE "public"."schedule_scheduleID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
+-- TABLES:
 
 -- ----------------------------
 -- Table structure for address
@@ -416,6 +210,512 @@ CREATE TABLE "public"."schedule" (
   "schedule_details" jsonb
 )
 ;
+
+
+-- SEQUENCES:
+
+-- ----------------------------
+-- Sequence structure for address_addressID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."address_addressID_seq";
+CREATE SEQUENCE "public"."address_addressID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for city_cityID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."city_cityID_seq";
+CREATE SEQUENCE "public"."city_cityID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for contract_contractID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."contract_contractID_seq";
+CREATE SEQUENCE "public"."contract_contractID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for contract_type_contract_typeID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."contract_type_contract_typeID_seq";
+CREATE SEQUENCE "public"."contract_type_contract_typeID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for country_countryID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."country_countryID_seq";
+CREATE SEQUENCE "public"."country_countryID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for department_departmentID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."department_departmentID_seq";
+CREATE SEQUENCE "public"."department_departmentID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_departement_employee_departementID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_departement_employee_departementID_seq";
+CREATE SEQUENCE "public"."employee_departement_employee_departementID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_employeeID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_employeeID_seq";
+CREATE SEQUENCE "public"."employee_employeeID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_insurance_employee_insuranceID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_insurance_employee_insuranceID_seq";
+CREATE SEQUENCE "public"."employee_insurance_employee_insuranceID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_pn_employee_pnID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_pn_employee_pnID_seq";
+CREATE SEQUENCE "public"."employee_pn_employee_pnID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_position_employee_positionID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_position_employee_positionID_seq";
+CREATE SEQUENCE "public"."employee_position_employee_positionID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for insurance_insuranceID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."insurance_insuranceID_seq";
+CREATE SEQUENCE "public"."insurance_insuranceID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for payment_currency_payment_currencyID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."payment_currency_payment_currencyID_seq";
+CREATE SEQUENCE "public"."payment_currency_payment_currencyID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for payment_paymentID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."payment_paymentID_seq";
+CREATE SEQUENCE "public"."payment_paymentID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for position_positionID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."position_positionID_seq";
+CREATE SEQUENCE "public"."position_positionID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for schedule_scheduleID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."schedule_scheduleID_seq";
+CREATE SEQUENCE "public"."schedule_scheduleID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."address_addressID_seq"
+OWNED BY "public"."address"."addressID";
+SELECT setval('"public"."address_addressID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."city_cityID_seq"
+OWNED BY "public"."city"."cityID";
+SELECT setval('"public"."city_cityID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."contract_contractID_seq"
+OWNED BY "public"."contract"."contractID";
+SELECT setval('"public"."contract_contractID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."contract_type_contract_typeID_seq"
+OWNED BY "public"."contract_type"."contract_typeID";
+SELECT setval('"public"."contract_type_contract_typeID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."country_countryID_seq"
+OWNED BY "public"."country"."countryID";
+SELECT setval('"public"."country_countryID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."department_departmentID_seq"
+OWNED BY "public"."department"."departmentID";
+SELECT setval('"public"."department_departmentID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."employee_departement_employee_departementID_seq"
+OWNED BY "public"."employee_department"."employee_departmentID";
+SELECT setval('"public"."employee_departement_employee_departementID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."employee_employeeID_seq"
+OWNED BY "public"."employee"."employeeID";
+SELECT setval('"public"."employee_employeeID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."employee_insurance_employee_insuranceID_seq"
+OWNED BY "public"."employee_insurance"."employee_insuranceID";
+SELECT setval('"public"."employee_insurance_employee_insuranceID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."employee_pn_employee_pnID_seq"
+OWNED BY "public"."employee_pn"."employee_pnID";
+SELECT setval('"public"."employee_pn_employee_pnID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."employee_position_employee_positionID_seq"
+OWNED BY "public"."employee_position"."employee_positionID";
+SELECT setval('"public"."employee_position_employee_positionID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."insurance_insuranceID_seq"
+OWNED BY "public"."insurance"."insuranceID";
+SELECT setval('"public"."insurance_insuranceID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."payment_currency_payment_currencyID_seq"
+OWNED BY "public"."payment_currency"."payment_currencyID";
+SELECT setval('"public"."payment_currency_payment_currencyID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."payment_paymentID_seq"
+OWNED BY "public"."payment"."paymentID";
+SELECT setval('"public"."payment_paymentID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."position_positionID_seq"
+OWNED BY "public"."position"."positionID";
+SELECT setval('"public"."position_positionID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."schedule_scheduleID_seq"
+OWNED BY "public"."schedule"."scheduleID";
+SELECT setval('"public"."schedule_scheduleID_seq"', 1, false);
+
+
+-- TYPES:
+
+-- ----------------------------
+-- Type structure for schedule_options
+-- ----------------------------
+DROP TYPE IF EXISTS "public"."schedule_options";
+CREATE TYPE "public"."schedule_options" AS ENUM (
+  '8am to 4pm',
+  '9am to 5pm',
+  '8am to 12am',
+  '12am to 8am',
+  'part-time'
+);
+ALTER TYPE "public"."schedule_options" OWNER TO "postgres";
+
+-- ----------------------------
+-- Type structure for citext
+-- ----------------------------
+DROP TYPE IF EXISTS "public"."citext";
+CREATE TYPE "public"."citext" (
+  INPUT = "public"."citextin",
+  OUTPUT = "public"."citextout",
+  RECEIVE = "public"."citextrecv",
+  SEND = "public"."citextsend",
+  INTERNALLENGTH = VARIABLE,
+  STORAGE = extended,
+  CATEGORY = S,
+  DELIMITER = ',',
+  COLLATABLE = true
+);
+ALTER TYPE "public"."citext" OWNER TO "postgres";
+
+
+-- PRIMARY KEYS:
+
+-- ----------------------------
+-- Primary Key structure for table address
+-- ----------------------------
+ALTER TABLE "public"."address" ADD CONSTRAINT "address_pkey" PRIMARY KEY ("addressID");
+
+-- ----------------------------
+-- Primary Key structure for table city
+-- ----------------------------
+ALTER TABLE "public"."city" ADD CONSTRAINT "city_pkey" PRIMARY KEY ("cityID");
+
+-- ----------------------------
+-- Primary Key structure for table contract
+-- ----------------------------
+ALTER TABLE "public"."contract" ADD CONSTRAINT "contract_pkey" PRIMARY KEY ("contractID");
+
+-- ----------------------------
+-- Primary Key structure for table contract_type
+-- ----------------------------
+ALTER TABLE "public"."contract_type" ADD CONSTRAINT "contract_type_pkey" PRIMARY KEY ("contract_typeID");
+
+-- ----------------------------
+-- Primary Key structure for table country
+-- ----------------------------
+ALTER TABLE "public"."country" ADD CONSTRAINT "country_pkey" PRIMARY KEY ("countryID");
+
+-- ----------------------------
+-- Primary Key structure for table department
+-- ----------------------------
+ALTER TABLE "public"."department" ADD CONSTRAINT "department_pkey" PRIMARY KEY ("departmentID");
+
+-- ----------------------------
+-- Primary Key structure for table employee
+-- ----------------------------
+ALTER TABLE "public"."employee" ADD CONSTRAINT "employee_pkey" PRIMARY KEY ("employeeID");
+
+-- ----------------------------
+-- Primary Key structure for table employee_department
+-- ----------------------------
+ALTER TABLE "public"."employee_department" ADD CONSTRAINT "employee_departement_pkey" PRIMARY KEY ("employee_departmentID");
+
+-- ----------------------------
+-- Primary Key structure for table employee_insurance
+-- ----------------------------
+ALTER TABLE "public"."employee_insurance" ADD CONSTRAINT "employee_insurance_pkey" PRIMARY KEY ("employee_insuranceID");
+
+-- ----------------------------
+-- Primary Key structure for table employee_pn
+-- ----------------------------
+ALTER TABLE "public"."employee_pn" ADD CONSTRAINT "employee_pn_pkey" PRIMARY KEY ("employee_pnID");
+
+-- ----------------------------
+-- Primary Key structure for table employee_position
+-- ----------------------------
+ALTER TABLE "public"."employee_position" ADD CONSTRAINT "employee_position_pkey" PRIMARY KEY ("employee_positionID");
+
+-- ----------------------------
+-- Primary Key structure for table insurance
+-- ----------------------------
+ALTER TABLE "public"."insurance" ADD CONSTRAINT "insurance_pkey" PRIMARY KEY ("insuranceID");
+
+-- ----------------------------
+-- Primary Key structure for table payment
+-- ----------------------------
+ALTER TABLE "public"."payment" ADD CONSTRAINT "payment_pkey" PRIMARY KEY ("paymentID");
+
+-- ----------------------------
+-- Primary Key structure for table payment_currency
+-- ----------------------------
+ALTER TABLE "public"."payment_currency" ADD CONSTRAINT "payment_currency_pkey" PRIMARY KEY ("payment_currencyID");
+
+-- ----------------------------
+-- Primary Key structure for table position
+-- ----------------------------
+ALTER TABLE "public"."position" ADD CONSTRAINT "position_pkey" PRIMARY KEY ("positionID");
+
+-- ----------------------------
+-- Primary Key structure for table schedule
+-- ----------------------------
+ALTER TABLE "public"."schedule" ADD CONSTRAINT "schedule_pkey" PRIMARY KEY ("scheduleID");
+
+
+-- FOREIGN KEYS:
+
+-- ----------------------------
+-- Foreign Keys structure for table address
+-- ----------------------------
+ALTER TABLE "public"."address" ADD CONSTRAINT "cityFK" FOREIGN KEY ("cityID") REFERENCES "public"."city" ("cityID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table city
+-- ----------------------------
+ALTER TABLE "public"."city" ADD CONSTRAINT "countryFK" FOREIGN KEY ("countryID") REFERENCES "public"."country" ("countryID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table contract
+-- ----------------------------
+ALTER TABLE "public"."contract" ADD CONSTRAINT "contract_typeFK" FOREIGN KEY ("contract_typeID") REFERENCES "public"."contract_type" ("contract_typeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."contract" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table department
+-- ----------------------------
+ALTER TABLE "public"."department" ADD CONSTRAINT "addressFK" FOREIGN KEY ("addressID") REFERENCES "public"."address" ("addressID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table employee
+-- ----------------------------
+ALTER TABLE "public"."employee" ADD CONSTRAINT "addressFK" FOREIGN KEY ("addressID") REFERENCES "public"."address" ("addressID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."employee" ADD CONSTRAINT "managerFK" FOREIGN KEY ("managerID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table employee_department
+-- ----------------------------
+ALTER TABLE "public"."employee_department" ADD CONSTRAINT "departmentFK" FOREIGN KEY ("departmentID") REFERENCES "public"."department" ("departmentID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."employee_department" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table employee_insurance
+-- ----------------------------
+ALTER TABLE "public"."employee_insurance" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."employee_insurance" ADD CONSTRAINT "insuranceFK" FOREIGN KEY ("insuranceID") REFERENCES "public"."insurance" ("insuranceID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table employee_pn
+-- ----------------------------
+ALTER TABLE "public"."employee_pn" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table employee_position
+-- ----------------------------
+ALTER TABLE "public"."employee_position" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."employee_position" ADD CONSTRAINT "positionFK" FOREIGN KEY ("positionID") REFERENCES "public"."position" ("positionID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table payment
+-- ----------------------------
+ALTER TABLE "public"."payment" ADD CONSTRAINT "contractFK" FOREIGN KEY ("contractID") REFERENCES "public"."contract" ("contractID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."payment" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."payment" ADD CONSTRAINT "payment_currencyFK" FOREIGN KEY ("payment_currencyID") REFERENCES "public"."payment_currency" ("payment_currencyID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table position
+-- ----------------------------
+ALTER TABLE "public"."position" ADD CONSTRAINT "scheduleFK" FOREIGN KEY ("scheduleID") REFERENCES "public"."schedule" ("scheduleID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+-- FUNCTIONS:
+
+-- ----------------------------
+-- Function structure for getretirementage
+-- ----------------------------
+DROP FUNCTION IF EXISTS "public"."getretirementage"("_contract_end" date, "_employeeid" int4);
+CREATE OR REPLACE FUNCTION "public"."getretirementage"("_contract_end" date, "_employeeid" int4)
+  RETURNS "pg_catalog"."int4" AS $BODY$
+declare _dob date;	
+begin
+    select e."dob" into _dob
+    from employee e
+    where e."employeeID" = getRetirementAge._employeeID;
+
+    return extract(year from age(_contract_end, _dob))::int4;
+end; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+
+-- ----------------------------
+-- Function structure for setenrollmentinactive
+-- ----------------------------
+DROP FUNCTION IF EXISTS "public"."setenrollmentinactive"();
+CREATE OR REPLACE FUNCTION "public"."setenrollmentinactive"()
+  RETURNS "pg_catalog"."trigger" AS $BODY$
+begin
+  if (extract(year from age(now(), new.enrollment_date)) >= 1) then new.active := false;
+  end if;
+  return new;
+end; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
 
 -- ----------------------------
 -- Function structure for citext
@@ -625,23 +925,6 @@ CREATE OR REPLACE FUNCTION "public"."citextsend"("public"."citext")
   COST 1;
 
 -- ----------------------------
--- Function structure for getretirementage
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."getretirementage"("_contract_end" date, "_employeeid" int4);
-CREATE OR REPLACE FUNCTION "public"."getretirementage"("_contract_end" date, "_employeeid" int4)
-  RETURNS "pg_catalog"."int4" AS $BODY$
-declare _dob date;	
-begin
-    select e."dob" into _dob
-    from employee e
-    where e."employeeID" = getRetirementAge._employeeID;
-
-    return extract(year from age(_contract_end, _dob))::int4;
-end; $BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-
--- ----------------------------
 -- Function structure for regexp_match
 -- ----------------------------
 DROP FUNCTION IF EXISTS "public"."regexp_match"("public"."citext", "public"."citext");
@@ -767,20 +1050,6 @@ $BODY$
   COST 100;
 
 -- ----------------------------
--- Function structure for setenrollmentinactive
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."setenrollmentinactive"();
-CREATE OR REPLACE FUNCTION "public"."setenrollmentinactive"()
-  RETURNS "pg_catalog"."trigger" AS $BODY$
-begin
-  if (extract(year from age(now(), new.enrollment_date)) >= 1) then new.active := false;
-  end if;
-  return new;
-end; $BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-
--- ----------------------------
 -- Function structure for split_part
 -- ----------------------------
 DROP FUNCTION IF EXISTS "public"."split_part"("public"."citext", "public"."citext", int4);
@@ -885,127 +1154,8 @@ $BODY$
   LANGUAGE sql IMMUTABLE STRICT
   COST 100;
 
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."address_addressID_seq"
-OWNED BY "public"."address"."addressID";
-SELECT setval('"public"."address_addressID_seq"', 1, false);
 
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."city_cityID_seq"
-OWNED BY "public"."city"."cityID";
-SELECT setval('"public"."city_cityID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."contract_contractID_seq"
-OWNED BY "public"."contract"."contractID";
-SELECT setval('"public"."contract_contractID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."contract_type_contract_typeID_seq"
-OWNED BY "public"."contract_type"."contract_typeID";
-SELECT setval('"public"."contract_type_contract_typeID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."country_countryID_seq"
-OWNED BY "public"."country"."countryID";
-SELECT setval('"public"."country_countryID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."department_departmentID_seq"
-OWNED BY "public"."department"."departmentID";
-SELECT setval('"public"."department_departmentID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."employee_departement_employee_departementID_seq"
-OWNED BY "public"."employee_department"."employee_departmentID";
-SELECT setval('"public"."employee_departement_employee_departementID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."employee_employeeID_seq"
-OWNED BY "public"."employee"."employeeID";
-SELECT setval('"public"."employee_employeeID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."employee_insurance_employee_insuranceID_seq"
-OWNED BY "public"."employee_insurance"."employee_insuranceID";
-SELECT setval('"public"."employee_insurance_employee_insuranceID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."employee_pn_employee_pnID_seq"
-OWNED BY "public"."employee_pn"."employee_pnID";
-SELECT setval('"public"."employee_pn_employee_pnID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."employee_position_employee_positionID_seq"
-OWNED BY "public"."employee_position"."employee_positionID";
-SELECT setval('"public"."employee_position_employee_positionID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."insurance_insuranceID_seq"
-OWNED BY "public"."insurance"."insuranceID";
-SELECT setval('"public"."insurance_insuranceID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."payment_currency_payment_currencyID_seq"
-OWNED BY "public"."payment_currency"."payment_currencyID";
-SELECT setval('"public"."payment_currency_payment_currencyID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."payment_paymentID_seq"
-OWNED BY "public"."payment"."paymentID";
-SELECT setval('"public"."payment_paymentID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."position_positionID_seq"
-OWNED BY "public"."position"."positionID";
-SELECT setval('"public"."position_positionID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
-ALTER SEQUENCE "public"."schedule_scheduleID_seq"
-OWNED BY "public"."schedule"."scheduleID";
-SELECT setval('"public"."schedule_scheduleID_seq"', 1, false);
-
--- ----------------------------
--- Primary Key structure for table address
--- ----------------------------
-ALTER TABLE "public"."address" ADD CONSTRAINT "address_pkey" PRIMARY KEY ("addressID");
-
--- ----------------------------
--- Primary Key structure for table city
--- ----------------------------
-ALTER TABLE "public"."city" ADD CONSTRAINT "city_pkey" PRIMARY KEY ("cityID");
+-- CONSTRAINTS AND TRIGGERS:
 
 -- ----------------------------
 -- Checks structure for table contract
@@ -1014,140 +1164,8 @@ ALTER TABLE "public"."contract" ADD CONSTRAINT "contract_duration" CHECK (contra
 ALTER TABLE "public"."contract" ADD CONSTRAINT "retirement_age" CHECK (getretirementage(contract_end, "employeeID") < 64);
 
 -- ----------------------------
--- Primary Key structure for table contract
--- ----------------------------
-ALTER TABLE "public"."contract" ADD CONSTRAINT "contract_pkey" PRIMARY KEY ("contractID");
-
--- ----------------------------
--- Primary Key structure for table contract_type
--- ----------------------------
-ALTER TABLE "public"."contract_type" ADD CONSTRAINT "contract_type_pkey" PRIMARY KEY ("contract_typeID");
-
--- ----------------------------
--- Primary Key structure for table country
--- ----------------------------
-ALTER TABLE "public"."country" ADD CONSTRAINT "country_pkey" PRIMARY KEY ("countryID");
-
--- ----------------------------
--- Primary Key structure for table department
--- ----------------------------
-ALTER TABLE "public"."department" ADD CONSTRAINT "department_pkey" PRIMARY KEY ("departmentID");
-
--- ----------------------------
--- Primary Key structure for table employee
--- ----------------------------
-ALTER TABLE "public"."employee" ADD CONSTRAINT "employee_pkey" PRIMARY KEY ("employeeID");
-
--- ----------------------------
--- Primary Key structure for table employee_department
--- ----------------------------
-ALTER TABLE "public"."employee_department" ADD CONSTRAINT "employee_departement_pkey" PRIMARY KEY ("employee_departmentID");
-
--- ----------------------------
 -- Triggers structure for table employee_insurance
 -- ----------------------------
 CREATE TRIGGER "enrollment_gap" BEFORE INSERT OR UPDATE ON "public"."employee_insurance"
 FOR EACH ROW
 EXECUTE PROCEDURE "public"."setenrollmentinactive"();
-
--- ----------------------------
--- Primary Key structure for table employee_insurance
--- ----------------------------
-ALTER TABLE "public"."employee_insurance" ADD CONSTRAINT "employee_insurance_pkey" PRIMARY KEY ("employee_insuranceID");
-
--- ----------------------------
--- Primary Key structure for table employee_pn
--- ----------------------------
-ALTER TABLE "public"."employee_pn" ADD CONSTRAINT "employee_pn_pkey" PRIMARY KEY ("employee_pnID");
-
--- ----------------------------
--- Primary Key structure for table employee_position
--- ----------------------------
-ALTER TABLE "public"."employee_position" ADD CONSTRAINT "employee_position_pkey" PRIMARY KEY ("employee_positionID");
-
--- ----------------------------
--- Primary Key structure for table insurance
--- ----------------------------
-ALTER TABLE "public"."insurance" ADD CONSTRAINT "insurance_pkey" PRIMARY KEY ("insuranceID");
-
--- ----------------------------
--- Primary Key structure for table payment
--- ----------------------------
-ALTER TABLE "public"."payment" ADD CONSTRAINT "payment_pkey" PRIMARY KEY ("paymentID");
-
--- ----------------------------
--- Primary Key structure for table payment_currency
--- ----------------------------
-ALTER TABLE "public"."payment_currency" ADD CONSTRAINT "payment_currency_pkey" PRIMARY KEY ("payment_currencyID");
-
--- ----------------------------
--- Primary Key structure for table position
--- ----------------------------
-ALTER TABLE "public"."position" ADD CONSTRAINT "position_pkey" PRIMARY KEY ("positionID");
-
--- ----------------------------
--- Primary Key structure for table schedule
--- ----------------------------
-ALTER TABLE "public"."schedule" ADD CONSTRAINT "schedule_pkey" PRIMARY KEY ("scheduleID");
-
--- ----------------------------
--- Foreign Keys structure for table address
--- ----------------------------
-ALTER TABLE "public"."address" ADD CONSTRAINT "cityFK" FOREIGN KEY ("cityID") REFERENCES "public"."city" ("cityID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table city
--- ----------------------------
-ALTER TABLE "public"."city" ADD CONSTRAINT "countryFK" FOREIGN KEY ("countryID") REFERENCES "public"."country" ("countryID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table contract
--- ----------------------------
-ALTER TABLE "public"."contract" ADD CONSTRAINT "contract_typeFK" FOREIGN KEY ("contract_typeID") REFERENCES "public"."contract_type" ("contract_typeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."contract" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table department
--- ----------------------------
-ALTER TABLE "public"."department" ADD CONSTRAINT "addressFK" FOREIGN KEY ("addressID") REFERENCES "public"."address" ("addressID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table employee
--- ----------------------------
-ALTER TABLE "public"."employee" ADD CONSTRAINT "addressFK" FOREIGN KEY ("addressID") REFERENCES "public"."address" ("addressID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."employee" ADD CONSTRAINT "managerFK" FOREIGN KEY ("managerID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table employee_department
--- ----------------------------
-ALTER TABLE "public"."employee_department" ADD CONSTRAINT "departmentFK" FOREIGN KEY ("departmentID") REFERENCES "public"."department" ("departmentID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."employee_department" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table employee_insurance
--- ----------------------------
-ALTER TABLE "public"."employee_insurance" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."employee_insurance" ADD CONSTRAINT "insuranceFK" FOREIGN KEY ("insuranceID") REFERENCES "public"."insurance" ("insuranceID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table employee_pn
--- ----------------------------
-ALTER TABLE "public"."employee_pn" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table employee_position
--- ----------------------------
-ALTER TABLE "public"."employee_position" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."employee_position" ADD CONSTRAINT "positionFK" FOREIGN KEY ("positionID") REFERENCES "public"."position" ("positionID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table payment
--- ----------------------------
-ALTER TABLE "public"."payment" ADD CONSTRAINT "contractFK" FOREIGN KEY ("contractID") REFERENCES "public"."contract" ("contractID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."payment" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."payment" ADD CONSTRAINT "payment_currencyFK" FOREIGN KEY ("payment_currencyID") REFERENCES "public"."payment_currency" ("payment_currencyID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table position
--- ----------------------------
-ALTER TABLE "public"."position" ADD CONSTRAINT "scheduleFK" FOREIGN KEY ("scheduleID") REFERENCES "public"."schedule" ("scheduleID") ON DELETE NO ACTION ON UPDATE NO ACTION;
