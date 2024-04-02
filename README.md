@@ -1,7 +1,7 @@
 <h1 align="center">HRMS-database</h1>
 
 - This is a basic PostgreSQL database schema designed for a Human Resources department to store and manage employee information, insurance options, contracts, payments, and more. <br/>
-- The [schema](https://github.com/andrewzgheib/HRMS-database/blob/main/HR-Schema.) consists of 16 tables, employing various relational models, domains, functions, etc. to ensure robust data management.
+- The [schema](https://github.com/andrewzgheib/HRMS-database/blob/main/schema-picture.png) consists of 16 tables, employing various relational models, domains, functions, etc. to ensure robust data management.
 
 ## Database Structure
 1. `employee`: Contains personal and organizational details of employees.
@@ -28,7 +28,7 @@
 - A contract system streamlining employee payments.
 
 ## Usage
-Run the [HR-schema](https://github.com/andrewzgheib/HRMS-database/blob/main/schema-picture.png) SQL file that contains all essential tables, attributes, and related components.
+Run the [HR-schema](https://github.com/andrewzgheib/HRMS-database/blob/main/schema-structure.sql) SQL file that contains all essential tables, attributes, and related components.
 
 ---
 *Special thanks to [@MichaelaRif](https://github.com/MichaelaRif) for contributing*
