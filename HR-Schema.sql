@@ -709,10 +709,28 @@ end; $BODY$
 DROP FUNCTION IF EXISTS "public"."setenrollmentinactive"();
 CREATE OR REPLACE FUNCTION "public"."setenrollmentinactive"()
   RETURNS "pg_catalog"."trigger" AS $BODY$
+declare existing_record record; one_year_later date;
 begin
-  if (extract(year from age(now(), new.enrollment_date)) >= 1) then new.active := false;
-  end if;
-  return new;
+    select * into existing_record
+    from employee_insurance
+    where employeeID = new.employeeID and insuranceID = new.insuranceID and active = true;
+
+    if found then
+        one_year_later := existing_record.enrollment_date + interval '1 year';
+
+        if one_year_later <= now() then
+            update employee_insurance
+            set active = false
+            where employeeID = new.employeeID
+                and insuranceID = new.insuranceID
+                and active = true;
+
+            return new;
+        else
+            raise exception 'Cannot renew insurance until one year has passed';
+        end if;
+    else return new;
+    end if;
 end; $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
@@ -1161,11 +1179,11 @@ $BODY$
 -- Checks structure for table contract
 -- ----------------------------
 ALTER TABLE "public"."contract" ADD CONSTRAINT "contract_duration" CHECK (contract_start < contract_end);
-ALTER TABLE "public"."contract" ADD CONSTRAINT "retirement_age" CHECK (getretirementage(contract_end, "employeeID") < 64);
+ALTER TABLE "public"."contract" ADD CONSTRAINT "retirement_age" CHECK (getretirementage(contract_end, "employeeID") <= 64);
 
 -- ----------------------------
 -- Triggers structure for table employee_insurance
 -- ----------------------------
-CREATE TRIGGER "enrollment_gap" BEFORE INSERT OR UPDATE ON "public"."employee_insurance"
+CREATE TRIGGER "enrollement_gap" BEFORE INSERT ON "public"."employee_insurance"
 FOR EACH ROW
 EXECUTE PROCEDURE "public"."setenrollmentinactive"();
