@@ -29,5 +29,8 @@ The schema consists of 16 tables, employing various relational models, constrain
 - An insurance module enabling employees to enroll in one option per year, and optionally including family members in the same or different option.
 - A contract system streamlining employee payments.
 
+## Usage
+Run the [HR-schema](https://github.com/andrewzgheib/HRMS-database) SQL file that contains all essential tables, attributes, and related components.
+
 ##
 *Special thanks to [@MichaelaRif](https://github.com/MichaelaRif) for contributing*
