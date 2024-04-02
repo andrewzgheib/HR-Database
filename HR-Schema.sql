@@ -4,14 +4,223 @@
  Source Server         : PostgreSQL
  Source Server Type    : PostgreSQL
  Source Server Version : 160002 (160002)
- Source Host           : localhost
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
  Target Server Version : 160002 (160002)
  File Encoding         : 65001
-
 */
+
+
+create extension citext;
+
+
+-- DOMAINS:
+
+--Email domain
+create domain company_email as citext
+check(value ~* '^[a-z]+\.[a-z]+(@companyname\.com)$' or value ~* '^[a-z]+\.[a-z]+\d*(@companyname\.com)$');
+
+--Country code domain
+create domain country_code as citext
+check(value ~* '^\+[0-9]{1,3}$');
+
+--Extension domain
+create domain extension_domain as citext
+check(value ~* '^[0-9]{1,4}$');
+
+
+-- ----------------------------
+-- Type structure for schedule_options
+-- ----------------------------
+DROP TYPE IF EXISTS "public"."schedule_options";
+CREATE TYPE "public"."schedule_options" AS ENUM (
+  '8am to 4pm',
+  '9am to 5pm',
+  '8am to 12am',
+  '12am to 8am',
+  'part-time'
+);
+ALTER TYPE "public"."schedule_options" OWNER TO "postgres";
+
+
+-- SEQUENCES:
+
+-- ----------------------------
+-- Sequence structure for address_addressID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."address_addressID_seq";
+CREATE SEQUENCE "public"."address_addressID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for city_cityID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."city_cityID_seq";
+CREATE SEQUENCE "public"."city_cityID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for contract_contractID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."contract_contractID_seq";
+CREATE SEQUENCE "public"."contract_contractID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for contract_type_contract_typeID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."contract_type_contract_typeID_seq";
+CREATE SEQUENCE "public"."contract_type_contract_typeID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for country_countryID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."country_countryID_seq";
+CREATE SEQUENCE "public"."country_countryID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for department_departmentID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."department_departmentID_seq";
+CREATE SEQUENCE "public"."department_departmentID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_departement_employee_departementID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_departement_employee_departementID_seq";
+CREATE SEQUENCE "public"."employee_departement_employee_departementID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_employeeID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_employeeID_seq";
+CREATE SEQUENCE "public"."employee_employeeID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_insurance_employee_insuranceID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_insurance_employee_insuranceID_seq";
+CREATE SEQUENCE "public"."employee_insurance_employee_insuranceID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_pn_employee_pnID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_pn_employee_pnID_seq";
+CREATE SEQUENCE "public"."employee_pn_employee_pnID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employee_position_employee_positionID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_position_employee_positionID_seq";
+CREATE SEQUENCE "public"."employee_position_employee_positionID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for insurance_insuranceID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."insurance_insuranceID_seq";
+CREATE SEQUENCE "public"."insurance_insuranceID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for payment_currency_payment_currencyID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."payment_currency_payment_currencyID_seq";
+CREATE SEQUENCE "public"."payment_currency_payment_currencyID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for payment_paymentID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."payment_paymentID_seq";
+CREATE SEQUENCE "public"."payment_paymentID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for position_positionID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."position_positionID_seq";
+CREATE SEQUENCE "public"."position_positionID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for schedule_scheduleID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."schedule_scheduleID_seq";
+CREATE SEQUENCE "public"."schedule_scheduleID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
 
 
 -- TABLES:
@@ -212,183 +421,7 @@ CREATE TABLE "public"."schedule" (
 ;
 
 
--- SEQUENCES:
-
--- ----------------------------
--- Sequence structure for address_addressID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."address_addressID_seq";
-CREATE SEQUENCE "public"."address_addressID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for city_cityID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."city_cityID_seq";
-CREATE SEQUENCE "public"."city_cityID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for contract_contractID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."contract_contractID_seq";
-CREATE SEQUENCE "public"."contract_contractID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for contract_type_contract_typeID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."contract_type_contract_typeID_seq";
-CREATE SEQUENCE "public"."contract_type_contract_typeID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for country_countryID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."country_countryID_seq";
-CREATE SEQUENCE "public"."country_countryID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for department_departmentID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."department_departmentID_seq";
-CREATE SEQUENCE "public"."department_departmentID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_departement_employee_departementID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_departement_employee_departementID_seq";
-CREATE SEQUENCE "public"."employee_departement_employee_departementID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_employeeID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_employeeID_seq";
-CREATE SEQUENCE "public"."employee_employeeID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_insurance_employee_insuranceID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_insurance_employee_insuranceID_seq";
-CREATE SEQUENCE "public"."employee_insurance_employee_insuranceID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_pn_employee_pnID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_pn_employee_pnID_seq";
-CREATE SEQUENCE "public"."employee_pn_employee_pnID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for employee_position_employee_positionID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."employee_position_employee_positionID_seq";
-CREATE SEQUENCE "public"."employee_position_employee_positionID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for insurance_insuranceID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."insurance_insuranceID_seq";
-CREATE SEQUENCE "public"."insurance_insuranceID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for payment_currency_payment_currencyID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."payment_currency_payment_currencyID_seq";
-CREATE SEQUENCE "public"."payment_currency_payment_currencyID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for payment_paymentID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."payment_paymentID_seq";
-CREATE SEQUENCE "public"."payment_paymentID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for position_positionID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."position_positionID_seq";
-CREATE SEQUENCE "public"."position_positionID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
--- Sequence structure for schedule_scheduleID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."schedule_scheduleID_seq";
-CREATE SEQUENCE "public"."schedule_scheduleID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
+-- ALTER SEQUENCES:
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -501,39 +534,6 @@ SELECT setval('"public"."position_positionID_seq"', 1, false);
 ALTER SEQUENCE "public"."schedule_scheduleID_seq"
 OWNED BY "public"."schedule"."scheduleID";
 SELECT setval('"public"."schedule_scheduleID_seq"', 1, false);
-
-
--- TYPES:
-
--- ----------------------------
--- Type structure for schedule_options
--- ----------------------------
-DROP TYPE IF EXISTS "public"."schedule_options";
-CREATE TYPE "public"."schedule_options" AS ENUM (
-  '8am to 4pm',
-  '9am to 5pm',
-  '8am to 12am',
-  '12am to 8am',
-  'part-time'
-);
-ALTER TYPE "public"."schedule_options" OWNER TO "postgres";
-
--- ----------------------------
--- Type structure for citext
--- ----------------------------
-DROP TYPE IF EXISTS "public"."citext";
-CREATE TYPE "public"."citext" (
-  INPUT = "public"."citextin",
-  OUTPUT = "public"."citextout",
-  RECEIVE = "public"."citextrecv",
-  SEND = "public"."citextsend",
-  INTERNALLENGTH = VARIABLE,
-  STORAGE = extended,
-  CATEGORY = S,
-  DELIMITER = ',',
-  COLLATABLE = true
-);
-ALTER TYPE "public"."citext" OWNER TO "postgres";
 
 
 -- PRIMARY KEYS:
@@ -735,451 +735,17 @@ end; $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
 
--- ----------------------------
--- Function structure for citext
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext"(bool);
-CREATE OR REPLACE FUNCTION "public"."citext"(bool)
-  RETURNS "public"."citext" AS $BODY$booltext$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
 
--- ----------------------------
--- Function structure for citext
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext"(inet);
-CREATE OR REPLACE FUNCTION "public"."citext"(inet)
-  RETURNS "public"."citext" AS $BODY$network_show$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext"(bpchar);
-CREATE OR REPLACE FUNCTION "public"."citext"(bpchar)
-  RETURNS "public"."citext" AS $BODY$rtrim1$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_cmp
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_cmp"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_cmp"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."int4" AS '$libdir/citext', 'citext_cmp'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_eq
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_eq"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_eq"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_eq'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_ge
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_ge"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_ge"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_ge'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_gt
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_gt"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_gt"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_gt'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_hash
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_hash"("public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_hash"("public"."citext")
-  RETURNS "pg_catalog"."int4" AS '$libdir/citext', 'citext_hash'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_hash_extended
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_hash_extended"("public"."citext", int8);
-CREATE OR REPLACE FUNCTION "public"."citext_hash_extended"("public"."citext", int8)
-  RETURNS "pg_catalog"."int8" AS '$libdir/citext', 'citext_hash_extended'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_larger
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_larger"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_larger"("public"."citext", "public"."citext")
-  RETURNS "public"."citext" AS '$libdir/citext', 'citext_larger'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_le
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_le"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_le"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_le'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_lt
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_lt"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_lt"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_lt'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_ne
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_ne"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_ne"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_ne'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_pattern_cmp
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_pattern_cmp"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_pattern_cmp"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."int4" AS '$libdir/citext', 'citext_pattern_cmp'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_pattern_ge
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_pattern_ge"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_pattern_ge"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_pattern_ge'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_pattern_gt
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_pattern_gt"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_pattern_gt"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_pattern_gt'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_pattern_le
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_pattern_le"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_pattern_le"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_pattern_le'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_pattern_lt
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_pattern_lt"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_pattern_lt"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS '$libdir/citext', 'citext_pattern_lt'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citext_smaller
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citext_smaller"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citext_smaller"("public"."citext", "public"."citext")
-  RETURNS "public"."citext" AS '$libdir/citext', 'citext_smaller'
-  LANGUAGE c IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citextin
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citextin"(cstring);
-CREATE OR REPLACE FUNCTION "public"."citextin"(cstring)
-  RETURNS "public"."citext" AS $BODY$textin$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citextout
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citextout"("public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citextout"("public"."citext")
-  RETURNS "pg_catalog"."cstring" AS $BODY$textout$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citextrecv
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citextrecv"(internal);
-CREATE OR REPLACE FUNCTION "public"."citextrecv"(internal)
-  RETURNS "public"."citext" AS $BODY$textrecv$BODY$
-  LANGUAGE internal STABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for citextsend
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."citextsend"("public"."citext");
-CREATE OR REPLACE FUNCTION "public"."citextsend"("public"."citext")
-  RETURNS "pg_catalog"."bytea" AS $BODY$textsend$BODY$
-  LANGUAGE internal STABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for regexp_match
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_match"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."regexp_match"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."_text" AS $BODY$
-    SELECT pg_catalog.regexp_match( $1::pg_catalog.text, $2::pg_catalog.text, 'i' );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
--- ----------------------------
--- Function structure for regexp_match
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_match"("public"."citext", "public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."regexp_match"("public"."citext", "public"."citext", text)
-  RETURNS "pg_catalog"."_text" AS $BODY$
-    SELECT pg_catalog.regexp_match( $1::pg_catalog.text, $2::pg_catalog.text, CASE WHEN pg_catalog.strpos($3, 'c') = 0 THEN  $3 || 'i' ELSE $3 END );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
--- ----------------------------
--- Function structure for regexp_matches
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_matches"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."regexp_matches"("public"."citext", "public"."citext")
-  RETURNS SETOF "pg_catalog"."_text" AS $BODY$
-    SELECT pg_catalog.regexp_matches( $1::pg_catalog.text, $2::pg_catalog.text, 'i' );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100
-  ROWS 1;
-
--- ----------------------------
--- Function structure for regexp_matches
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_matches"("public"."citext", "public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."regexp_matches"("public"."citext", "public"."citext", text)
-  RETURNS SETOF "pg_catalog"."_text" AS $BODY$
-    SELECT pg_catalog.regexp_matches( $1::pg_catalog.text, $2::pg_catalog.text, CASE WHEN pg_catalog.strpos($3, 'c') = 0 THEN  $3 || 'i' ELSE $3 END );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100
-  ROWS 10;
-
--- ----------------------------
--- Function structure for regexp_replace
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_replace"("public"."citext", "public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."regexp_replace"("public"."citext", "public"."citext", text)
-  RETURNS "pg_catalog"."text" AS $BODY$
-    SELECT pg_catalog.regexp_replace( $1::pg_catalog.text, $2::pg_catalog.text, $3, 'i');
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
--- ----------------------------
--- Function structure for regexp_replace
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_replace"("public"."citext", "public"."citext", text, text);
-CREATE OR REPLACE FUNCTION "public"."regexp_replace"("public"."citext", "public"."citext", text, text)
-  RETURNS "pg_catalog"."text" AS $BODY$
-    SELECT pg_catalog.regexp_replace( $1::pg_catalog.text, $2::pg_catalog.text, $3, CASE WHEN pg_catalog.strpos($4, 'c') = 0 THEN  $4 || 'i' ELSE $4 END);
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
--- ----------------------------
--- Function structure for regexp_split_to_array
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_split_to_array"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."regexp_split_to_array"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."_text" AS $BODY$
-    SELECT pg_catalog.regexp_split_to_array( $1::pg_catalog.text, $2::pg_catalog.text, 'i' );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
--- ----------------------------
--- Function structure for regexp_split_to_array
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_split_to_array"("public"."citext", "public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."regexp_split_to_array"("public"."citext", "public"."citext", text)
-  RETURNS "pg_catalog"."_text" AS $BODY$
-    SELECT pg_catalog.regexp_split_to_array( $1::pg_catalog.text, $2::pg_catalog.text, CASE WHEN pg_catalog.strpos($3, 'c') = 0 THEN  $3 || 'i' ELSE $3 END );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
--- ----------------------------
--- Function structure for regexp_split_to_table
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_split_to_table"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."regexp_split_to_table"("public"."citext", "public"."citext")
-  RETURNS SETOF "pg_catalog"."text" AS $BODY$
-    SELECT pg_catalog.regexp_split_to_table( $1::pg_catalog.text, $2::pg_catalog.text, 'i' );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100
-  ROWS 1000;
-
--- ----------------------------
--- Function structure for regexp_split_to_table
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."regexp_split_to_table"("public"."citext", "public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."regexp_split_to_table"("public"."citext", "public"."citext", text)
-  RETURNS SETOF "pg_catalog"."text" AS $BODY$
-    SELECT pg_catalog.regexp_split_to_table( $1::pg_catalog.text, $2::pg_catalog.text, CASE WHEN pg_catalog.strpos($3, 'c') = 0 THEN  $3 || 'i' ELSE $3 END );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100
-  ROWS 1000;
-
--- ----------------------------
--- Function structure for replace
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."replace"("public"."citext", "public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."replace"("public"."citext", "public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."text" AS $BODY$
-    SELECT pg_catalog.regexp_replace( $1::pg_catalog.text, pg_catalog.regexp_replace($2::pg_catalog.text, '([^a-zA-Z_0-9])', E'\\\\\\1', 'g'), $3::pg_catalog.text, 'gi' );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
--- ----------------------------
--- Function structure for split_part
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."split_part"("public"."citext", "public"."citext", int4);
-CREATE OR REPLACE FUNCTION "public"."split_part"("public"."citext", "public"."citext", int4)
-  RETURNS "pg_catalog"."text" AS $BODY$
-    SELECT (pg_catalog.regexp_split_to_array( $1::pg_catalog.text, pg_catalog.regexp_replace($2::pg_catalog.text, '([^a-zA-Z_0-9])', E'\\\\\\1', 'g'), 'i'))[$3];
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
--- ----------------------------
--- Function structure for strpos
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."strpos"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."strpos"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."int4" AS $BODY$
-    SELECT pg_catalog.strpos( pg_catalog.lower( $1::pg_catalog.text ), pg_catalog.lower( $2::pg_catalog.text ) );
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
--- ----------------------------
--- Function structure for texticlike
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."texticlike"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."texticlike"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS $BODY$texticlike$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for texticlike
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."texticlike"("public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."texticlike"("public"."citext", text)
-  RETURNS "pg_catalog"."bool" AS $BODY$texticlike$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for texticnlike
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."texticnlike"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."texticnlike"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS $BODY$texticnlike$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for texticnlike
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."texticnlike"("public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."texticnlike"("public"."citext", text)
-  RETURNS "pg_catalog"."bool" AS $BODY$texticnlike$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for texticregexeq
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."texticregexeq"("public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."texticregexeq"("public"."citext", text)
-  RETURNS "pg_catalog"."bool" AS $BODY$texticregexeq$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for texticregexeq
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."texticregexeq"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."texticregexeq"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS $BODY$texticregexeq$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for texticregexne
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."texticregexne"("public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."texticregexne"("public"."citext", text)
-  RETURNS "pg_catalog"."bool" AS $BODY$texticregexne$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for texticregexne
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."texticregexne"("public"."citext", "public"."citext");
-CREATE OR REPLACE FUNCTION "public"."texticregexne"("public"."citext", "public"."citext")
-  RETURNS "pg_catalog"."bool" AS $BODY$texticregexne$BODY$
-  LANGUAGE internal IMMUTABLE STRICT
-  COST 1;
-
--- ----------------------------
--- Function structure for translate
--- ----------------------------
-DROP FUNCTION IF EXISTS "public"."translate"("public"."citext", "public"."citext", text);
-CREATE OR REPLACE FUNCTION "public"."translate"("public"."citext", "public"."citext", text)
-  RETURNS "pg_catalog"."text" AS $BODY$
-    SELECT pg_catalog.translate( pg_catalog.translate( $1::pg_catalog.text, pg_catalog.lower($2::pg_catalog.text), $3), pg_catalog.upper($2::pg_catalog.text), $3);
-$BODY$
-  LANGUAGE sql IMMUTABLE STRICT
-  COST 100;
-
-
--- CONSTRAINTS AND TRIGGERS:
+-- CONSTRAINTS:
 
 -- ----------------------------
 -- Checks structure for table contract
 -- ----------------------------
 ALTER TABLE "public"."contract" ADD CONSTRAINT "contract_duration" CHECK (contract_start < contract_end);
 ALTER TABLE "public"."contract" ADD CONSTRAINT "retirement_age" CHECK (getretirementage(contract_end, "employeeID") <= 64);
+
+
+-- TRIGGERS:
 
 -- ----------------------------
 -- Triggers structure for table employee_insurance
