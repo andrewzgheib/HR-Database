@@ -1,7 +1,7 @@
 <h1 align="center">HRMS-database</h1>
 
 - This is a basic PostgreSQL database schema designed for a Human Resources department to store and manage employee information, insurance options, contracts, payments, and more. <br/>
-- The [schema](https://github.com/andrewzgheib/HRMS-database/blob/main/schema-picture.png) consists of 16 tables, employing various relational models, domains, functions, etc. to ensure robust data management.
+- The [schema](https://github.com/andrewzgheib/HRMS-database/blob/main/schema-picture.png) consists of 15 tables, employing various relational models, domains, functions, etc. to ensure robust data management.
 
 ## Database Structure
 1. `employee`: Contains personal and organizational details of employees.
@@ -13,13 +13,12 @@
 7. `employee_insurance`: Links employees to their chosen insurance option, including coverage for family members.
 8. `insurance`: Holds information about available insurance plans.
 9. `contract`: Tracks contract details, including start and end dates, and an encrypted serial number for each contract.
-10. `contract_type`: Records different types contracts within the organization.
-11. `payment`: Stores payments records for employees based on their contracts.
-12. `payment_currency`: Holds several payment currencies. 
-13. `employee_pn`: Stores personal and office contact numbers , including optional extensions.
-14. `address`: Records address details for employees accross different cities.
-15. `city`: Lists cities within each country.
-16. `country`: Contains a comprehensive list of countries.
+10. `payment`: Stores payments records for employees based on their contracts.
+11. `payment_currency`: Holds several payment currencies. 
+12. `employee_pn`: Stores personal and office contact numbers , including optional extensions.
+13. `address`: Records address details for employees accross different cities.
+14. `city`: Lists cities within each country.
+15. `country`: Contains a comprehensive list of countries.
 
 ## Key Features
 - Employees can be associated with multiple departments simultaneously, holding different positions within each.
