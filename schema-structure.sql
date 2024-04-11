@@ -80,17 +80,6 @@ START 1
 CACHE 1;
 
 -- ----------------------------
--- Sequence structure for contract_type_contract_typeID_seq
--- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."contract_type_contract_typeID_seq";
-CREATE SEQUENCE "public"."contract_type_contract_typeID_seq" 
-INCREMENT 1
-MINVALUE  1
-MAXVALUE 2147483647
-START 1
-CACHE 1;
-
--- ----------------------------
 -- Sequence structure for country_countryID_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."country_countryID_seq";
@@ -258,21 +247,11 @@ DROP TABLE IF EXISTS "public"."contract";
 CREATE TABLE "public"."contract" (
   "contractID" int4 NOT NULL DEFAULT nextval('"contract_contractID_seq"'::regclass),
   "employeeID" int4 NOT NULL,
-  "contract_typeID" int4 NOT NULL,
+  "positionID" int4 NOT NULL,
   "serial_number" bytea NOT NULL,
   "contract_start" date NOT NULL DEFAULT now(),
   "contract_end" date NOT NULL,
   "contract_details" jsonb
-)
-;
-
--- ----------------------------
--- Table structure for contract_type
--- ----------------------------
-DROP TABLE IF EXISTS "public"."contract_type";
-CREATE TABLE "public"."contract_type" (
-  "contract_typeID" int4 NOT NULL DEFAULT nextval('"contract_type_contract_typeID_seq"'::regclass),
-  "contract_type" varchar(255) COLLATE "pg_catalog"."default" NOT NULL
 )
 ;
 
@@ -447,13 +426,6 @@ SELECT setval('"public"."contract_contractID_seq"', 1, false);
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
-ALTER SEQUENCE "public"."contract_type_contract_typeID_seq"
-OWNED BY "public"."contract_type"."contract_typeID";
-SELECT setval('"public"."contract_type_contract_typeID_seq"', 1, false);
-
--- ----------------------------
--- Alter sequences owned by
--- ----------------------------
 ALTER SEQUENCE "public"."country_countryID_seq"
 OWNED BY "public"."country"."countryID";
 SELECT setval('"public"."country_countryID_seq"', 1, false);
@@ -554,11 +526,6 @@ ALTER TABLE "public"."city" ADD CONSTRAINT "city_pkey" PRIMARY KEY ("cityID");
 ALTER TABLE "public"."contract" ADD CONSTRAINT "contract_pkey" PRIMARY KEY ("contractID");
 
 -- ----------------------------
--- Primary Key structure for table contract_type
--- ----------------------------
-ALTER TABLE "public"."contract_type" ADD CONSTRAINT "contract_type_pkey" PRIMARY KEY ("contract_typeID");
-
--- ----------------------------
 -- Primary Key structure for table country
 -- ----------------------------
 ALTER TABLE "public"."country" ADD CONSTRAINT "country_pkey" PRIMARY KEY ("countryID");
@@ -634,7 +601,7 @@ ALTER TABLE "public"."city" ADD CONSTRAINT "countryFK" FOREIGN KEY ("countryID")
 -- ----------------------------
 -- Foreign Keys structure for table contract
 -- ----------------------------
-ALTER TABLE "public"."contract" ADD CONSTRAINT "contract_typeFK" FOREIGN KEY ("contract_typeID") REFERENCES "public"."contract_type" ("contract_typeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."contract" ADD CONSTRAINT "positionFK" FOREIGN KEY ("positionID") REFERENCES "public"."position" ("positionID") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."contract" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
