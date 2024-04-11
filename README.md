@@ -27,7 +27,7 @@
 - A contract system streamlining employee payments.
 
 ## Usage
-Run the [HR-schema](https://github.com/andrewzgheib/HRMS-database/blob/main/schema-structure.sql) SQL file that contains all essential tables, attributes, and related components. <br/><br/>
+Run the [schema-structure](https://github.com/andrewzgheib/HRMS-database/blob/main/schema-structure.sql) SQL file that contains all essential tables, attributes, and related components. <br/><br/>
 
 ---
 <p align="center"><em>Special thanks to <a href="https://github.com/MichaelaRif">@MichaelaRif</a> for contributing</em></p>
