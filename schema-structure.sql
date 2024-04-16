@@ -296,7 +296,6 @@ CREATE TABLE "public"."employee" (
   "first_name" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "last_name" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "dob" date NOT NULL,
-  "managerID" int4,
   "email" "public"."company_email" COLLATE "pg_catalog"."default",
   "addressID" int4,
   "hiredate" date NOT NULL DEFAULT now(),
@@ -322,7 +321,8 @@ DROP TABLE IF EXISTS "public"."employee_department";
 CREATE TABLE "public"."employee_department" (
   "employee_departmentID" int4 NOT NULL DEFAULT nextval('"employee_departement_employee_departementID_seq"'::regclass),
   "employeeID" int4 NOT NULL,
-  "departmentID" int4 NOT NULL
+  "departmentID" int4 NOT NULL,
+  "managerID" int4 NOT NULL
 )
 ;
 
@@ -647,7 +647,6 @@ ALTER TABLE "public"."department" ADD CONSTRAINT "addressFK" FOREIGN KEY ("addre
 -- Foreign Keys structure for table employee
 -- ----------------------------
 ALTER TABLE "public"."employee" ADD CONSTRAINT "addressFK" FOREIGN KEY ("addressID") REFERENCES "public"."address" ("addressID") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."employee" ADD CONSTRAINT "managerFK" FOREIGN KEY ("managerID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Keys structure for table employee_address
@@ -660,6 +659,7 @@ ALTER TABLE "public"."employee_address" ADD CONSTRAINT "addressFK" FOREIGN KEY (
 -- ----------------------------
 ALTER TABLE "public"."employee_department" ADD CONSTRAINT "departmentFK" FOREIGN KEY ("departmentID") REFERENCES "public"."department" ("departmentID") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."employee_department" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."employee_department" ADD CONSTRAINT "managerFK" FOREIGN KEY ("managerID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Keys structure for table employee_insurance
