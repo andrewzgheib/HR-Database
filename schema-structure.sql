@@ -102,6 +102,17 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for employee_address_employee_addressID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employee_address_employee_addressID_seq";
+CREATE SEQUENCE "public"."employee_address_employee_addressID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for employee_departement_employee_departementID_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."employee_departement_employee_departementID_seq";
@@ -294,6 +305,17 @@ CREATE TABLE "public"."employee" (
 ;
 
 -- ----------------------------
+-- Table structure for employee_address
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."employee_address";
+CREATE TABLE "public"."employee_address" (
+  "employee_addressID" int4 NOT NULL DEFAULT nextval('"employee_address_employee_addressID_seq"'::regclass),
+  "employeeID" int4,
+  "addressID" int4
+)
+;
+
+-- ----------------------------
 -- Table structure for employee_department
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."employee_department";
@@ -440,6 +462,13 @@ SELECT setval('"public"."department_departmentID_seq"', 1, false);
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
+ALTER SEQUENCE "public"."employee_address_employee_addressID_seq"
+OWNED BY "public"."employee_address"."employee_addressID";
+SELECT setval('"public"."employee_address_employee_addressID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
 ALTER SEQUENCE "public"."employee_departement_employee_departementID_seq"
 OWNED BY "public"."employee_department"."employee_departmentID";
 SELECT setval('"public"."employee_departement_employee_departementID_seq"', 1, false);
@@ -541,6 +570,11 @@ ALTER TABLE "public"."department" ADD CONSTRAINT "department_pkey" PRIMARY KEY (
 ALTER TABLE "public"."employee" ADD CONSTRAINT "employee_pkey" PRIMARY KEY ("employeeID");
 
 -- ----------------------------
+-- Primary Key structure for table employee_address
+-- ----------------------------
+ALTER TABLE "public"."employee_address" ADD CONSTRAINT "employee_address_pkey" PRIMARY KEY ("employee_addressID");
+
+-- ----------------------------
 -- Primary Key structure for table employee_department
 -- ----------------------------
 ALTER TABLE "public"."employee_department" ADD CONSTRAINT "employee_departement_pkey" PRIMARY KEY ("employee_departmentID");
@@ -614,6 +648,12 @@ ALTER TABLE "public"."department" ADD CONSTRAINT "addressFK" FOREIGN KEY ("addre
 -- ----------------------------
 ALTER TABLE "public"."employee" ADD CONSTRAINT "addressFK" FOREIGN KEY ("addressID") REFERENCES "public"."address" ("addressID") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."employee" ADD CONSTRAINT "managerFK" FOREIGN KEY ("managerID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table employee_address
+-- ----------------------------
+ALTER TABLE "public"."employee_address" ADD CONSTRAINT "employeeFK" FOREIGN KEY ("employeeID") REFERENCES "public"."employee" ("employeeID") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."employee_address" ADD CONSTRAINT "addressFK" FOREIGN KEY ("addressID") REFERENCES "public"."address" ("addressID") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Keys structure for table employee_department
