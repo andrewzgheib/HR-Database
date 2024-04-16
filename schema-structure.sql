@@ -39,7 +39,8 @@ CREATE TYPE "public"."schedule_options" AS ENUM (
   '9am to 5pm',
   '8am to 12am',
   '12am to 8am',
-  'part-time'
+  'part-time',
+  'remote'
 );
 ALTER TYPE "public"."schedule_options" OWNER TO "postgres";
 
