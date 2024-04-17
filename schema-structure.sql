@@ -298,7 +298,6 @@ CREATE TABLE "public"."employee" (
   "last_name" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "dob" date NOT NULL,
   "email" "public"."company_email" COLLATE "pg_catalog"."default",
-  "addressID" int4,
   "hiredate" date NOT NULL DEFAULT now(),
   "active" bool DEFAULT true
 )
